@@ -63,7 +63,7 @@ export const PROJECTS_DATA = [
 export const CONTACT_DATA = {
     email: "kumardipak6737@gmail.com",
     phone: "+91 6201453140",
-    address: "Amarnath residency 2, bonand dindoli kharwasa road surat",
+    // address: "Amarnath residency 2, bonand dindoli kharwasa road surat",
     social: {
         github: "https://github.com/dkumar6737",
         linkedin: "https://linkedin.com/in/dipak-kumar-6737",
