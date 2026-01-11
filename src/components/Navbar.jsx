@@ -48,7 +48,7 @@ const Navbar = () => {
             }}
         >
             <div className="logo" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
-                <a href="#" className="gradient-text">ALEX.DEV</a>
+                <a href="#" className="gradient-text">Dipak.DEV</a>
             </div>
 
             {/* Desktop Menu */}

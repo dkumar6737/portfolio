@@ -22,7 +22,7 @@ const Footer = () => {
                 </a>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                &copy; {new Date().getFullYear()} Alex Dev. All rights reserved.
+                &copy; {new Date().getFullYear()} Dipak Kumar. All rights reserved.
             </p>
         </footer>
     );

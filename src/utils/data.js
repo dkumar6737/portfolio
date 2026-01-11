@@ -1,5 +1,5 @@
 import { FaReact, FaNodeJs, FaJs, FaHtml5, FaCss3Alt, FaGitAlt } from 'react-icons/fa';
-import { SiMongodb, SiTailwindcss, SiFramer } from 'react-icons/si';
+import { SiMongodb, SiTailwindcss, SiExpress, SiPostgresql, SiTypescript, SiShopify, SiPhp, SiMysql } from 'react-icons/si';
 
 export const NAV_LINKS = [
     { id: 'home', label: 'Home' },
@@ -10,8 +10,8 @@ export const NAV_LINKS = [
 ];
 
 export const HERO_DATA = {
-    name: "Alex Dev",
-    role: "Creative Frontend Developer",
+    name: "Dipak Kumar",
+    role: "Creative Full Stack Developer",
     tagline: "Building digital experiences that matter.",
     description: "I specialize in crafting high-performance, interactive, and visually stunning web applications using modern technologies.",
 };
@@ -19,11 +19,17 @@ export const HERO_DATA = {
 export const SKILLS_DATA = [
     { name: "React", icon: FaReact, color: "#61DAFB" },
     { name: "JavaScript", icon: FaJs, color: "#F7DF1E" },
-    { name: "HTML5", icon: FaHtml5, color: "#E34F26" },
-    { name: "CSS3", icon: FaCss3Alt, color: "#1572B6" },
+    { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+    { name: "HTML", icon: FaHtml5, color: "#E34F26" },
+    { name: "CSS", icon: FaCss3Alt, color: "#1572B6" },
+    { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
     { name: "Node.js", icon: FaNodeJs, color: "#339933" },
+    { name: "Express", icon: SiExpress, color: "#000000" },
     { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
-    { name: "Framer Motion", icon: SiFramer, color: "#0055FF" },
+    { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
+    { name: "MySQL", icon: SiMysql, color: "#336791" },
+    { name: "PHP", icon: SiPhp, color: "#777CBB" },
+    { name: "Shopify", icon: SiShopify, color: "#95BF47" },
     { name: "Git", icon: FaGitAlt, color: "#F05032" },
 ];
 
