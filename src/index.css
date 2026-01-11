@@ -1,0 +1,121 @@
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #121212;
+  --bg-card: #1e1e1e;
+  
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --text-accent: #646cff; /* Vibrant purple-blue */
+  
+  --color-primary: #646cff;
+  --color-secondary: #b364ff;
+  --color-accent: #00ff9d; /* Tech green for small accents */
+  
+  --font-main: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-fast);
+}
+
+ul {
+  list-style: none;
+}
+
+section {
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden; /* Prevent overflow from animations */
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-card);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  display: inline-block;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(100, 108, 255, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-weight: 600;
+  display: inline-block;
+  transition: all var(--transition-fast);
+}
+
+.btn-outline:hover {
+  background: rgba(100, 108, 255, 0.1);
+  transform: translateY(-2px);
+}
