@@ -11,22 +11,30 @@ export const getAllProjects = async (req, res) => {
 };
 
 
-//Created all projects
+//Created projects (Handled single object or array)
 export const createProjects = async (req, res) => {
     try {
-        const { title, description, image, technologies, link, githubLink } = req.body;
+        const data = req.body;
 
-        const newProject = new projectModel({
-            title,
-            description,
-            image,
-            technologies,
-            link,
-            githubLink
-        });
+        if (Array.isArray(data)) {
+            // If it's an array, use insertMany
+            const newProjects = await projectModel.insertMany(data);
+            res.status(201).json(newProjects);
+        } else {
+            // If it's a single object
+            const { title, description, image, technologies, link, githubLink } = data;
+            const newProject = new projectModel({
+                title,
+                description,
+                image,
+                technologies,
+                link,
+                githubLink
+            });
 
-        await newProject.save();
-        res.status(201).json(newProject);
+            await newProject.save();
+            res.status(201).json(newProject);
+        }
     } catch (error) {
         res.status(500).json({ message: "Error in creating projects!", error: error.message })
     }
