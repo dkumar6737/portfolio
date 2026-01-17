@@ -11,9 +11,6 @@ export const sendContactMessage = async (req, res) => {
         console.log("Setting up Nodemailer...");
         const transporter = nodemailer.createTransport({
             service: "gmail",
-            host: "smtp.gmail.com",
-            port: 465,
-            secure: true,
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS
@@ -21,8 +18,8 @@ export const sendContactMessage = async (req, res) => {
         });
 
         const mailOptions = {
-            from: process.env.EMAIL_USER, // Using authenticated user as sender to avoid Gmail blocking
-            replyTo: email, // Put visitor's email here so you can reply directly
+            from: process.env.EMAIL_USER,
+            replyTo: email,
             to: process.env.EMAIL_USER,
             subject: `New message from portfolio site: ${name}`,
             text: `You have a new message from your portfolio site. \n\n Name: ${name} \n\n Email: ${email} \n\n Message: ${message}`
@@ -34,7 +31,7 @@ export const sendContactMessage = async (req, res) => {
 
         res.status(200).json({ message: "Message sent successfully" });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: "Failed to send message" });
+        console.error("DETAILED ERROR:", error); // Log the full error object
+        res.status(500).json({ message: "Failed to send message", error: error.message });
     }
 }
