@@ -5,43 +5,39 @@ export const sendContactMessage = async (req, res) => {
     try {
         const { name, email, message } = req.body;
 
-        console.log("Environment Check:", {
-            hasUser: !!process.env.EMAIL_USER,
-            hasPass: !!process.env.EMAIL_PASS
-        });
-
         console.log("Saving message to DB...");
         const newMessage = await contactModel.create({ name, email, message });
         console.log("Message saved to DB:", newMessage._id);
 
-        console.log("Setting up Nodemailer with Debugging...");
+        console.log("Setting up Nodemailer (Live Mode)...");
         const transporter = nodemailer.createTransport({
-            service: "gmail",
+            host: "smtp.gmail.com",
+            port: 587,
+            secure: false, // Use STARTTLS
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS
             },
-            logger: true, // Show internal logs
-            debug: true,  // Show debug info
-            connectionTimeout: 10000,
-            greetingTimeout: 10000
+            tls: {
+                rejectUnauthorized: false // Helps with some hosting environments
+            }
         });
 
         const mailOptions = {
             from: process.env.EMAIL_USER,
             replyTo: email,
             to: process.env.EMAIL_USER,
-            subject: `New Portfolio Message from ${name}`,
-            text: `You have a new message from your portfolio site.\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+            subject: `Portfolio Message: ${name}`,
+            text: `You have a new message from your portfolio.\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
         };
 
         console.log("Sending email...");
-        const info = await transporter.sendMail(mailOptions);
-        console.log("Email sent successfully:", info.messageId);
+        await transporter.sendMail(mailOptions);
+        console.log("Email sent successfully!");
 
         res.status(200).json({ message: "Message sent successfully" });
     } catch (error) {
         console.error("DETAILED ERROR:", error);
-        res.status(500).json({ message: "Server error", error: error.message });
+        res.status(500).json({ message: "Failed to send message", error: error.message });
     }
 }
