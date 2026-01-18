@@ -8,9 +8,6 @@ export const sendContactMessage = async (req, res) => {
         const newMessage = await contactModel.create({ name, email, message });
         console.log("Message saved to DB:", newMessage._id);
 
-        // We removed Nodemailer because hosting providers block SMTP.
-        // The email is now sent directly from the frontend using EmailJS.
-
         res.status(200).json({
             message: "Message saved to database successfully.",
             dbId: newMessage._id
