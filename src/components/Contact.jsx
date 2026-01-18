@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CONTACT_DATA } from '../utils/data';
 import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaPaperPlane, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 import axios from 'axios';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -37,28 +38,40 @@ const Contact = () => {
         setStatus({ loading: true, success: false, error: null });
 
         try {
+            // 1. Save to Database (Backend Backup)
             const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-            const response = await axios.post(`${API_URL}/api/contact`, formData);
+            await axios.post(`${API_URL}/api/contact`, formData);
 
-            if (response.status === 200) {
-                setStatus({
-                    loading: false,
-                    success: true,
-                    error: null
-                });
-                setFormData({ name: '', email: '', message: '' });
+            // 2. Send Email Notification (EmailJS - Bypasses Server Firewall)
+            await emailjs.send(
+                import.meta.env.VITE_EMAILJS_SERVICE_ID,
+                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+                {
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    message: formData.message,
+                },
+                import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+            );
 
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    setStatus(prev => ({ ...prev, success: false }));
-                }, 5000);
-            }
+            setStatus({
+                loading: false,
+                success: true,
+                error: null
+            });
+            setFormData({ name: '', email: '', message: '' });
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                setStatus(prev => ({ ...prev, success: false }));
+            }, 5000);
+
         } catch (error) {
             console.error("Contact Error:", error);
             setStatus({
                 loading: false,
                 success: false,
-                error: error.response?.data?.message || "Failed to send message. Please try again later."
+                error: "Failed to send message. Please try again later."
             });
         }
     };
